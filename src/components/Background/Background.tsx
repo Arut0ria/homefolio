@@ -1,8 +1,8 @@
 import { PlaneGeometry, ShaderMaterial, TextureLoader } from "three";
+import { useFrame } from "@react-three/fiber";
 
 import fragmentSahder from "./shaders/background.frag?raw";
 import vertexShader from "./shaders/background.vert?raw";
-import { useFrame } from "@react-three/fiber";
 
 export default function Background() {
   const height = 20.0;

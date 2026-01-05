@@ -46,8 +46,8 @@ void main() {
   float moving_box = sdBox(moving_tiles, vec2(box_size), border_size);
   float static_box = sdBox(tiles, vec2(box_size), border_size);
 
-  float static_border = min(0.7, smoothstep(0.0, -0.1, static_box));
-  float moving_border = min(0.7, smoothstep(0.0, -0.1, moving_box));
+  float static_border = min(0.4, smoothstep(0.0, -0.1, static_box));
+  float moving_border = min(0.4, smoothstep(0.0, -0.1, moving_box));
 
   vec4 color = vec4(
     minCol * step(min(static_box, moving_box), 0.0),

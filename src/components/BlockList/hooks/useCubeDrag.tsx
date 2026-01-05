@@ -22,7 +22,7 @@ function getIndexFromPosition(
   );
 }
 
-function setCursor(c: string) {
+export function setCursor(c: string) {
   document.body.style.cursor = c;
 }
 

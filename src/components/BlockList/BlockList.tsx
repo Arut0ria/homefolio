@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo } from "react";
 import { type Mesh } from "three";
 import Card3D from "../Card3D/Card3d";
 import IconPlane from "./components/IconPlane";
-import useCubeDrag from "./hooks/useCubeDrag";
+import useCubeDrag, { setCursor } from "./hooks/useCubeDrag";
 import { createCubeMaterial } from "./materials/materials";
 
 useGLTF.preload("/cube_icon.glb");
@@ -72,6 +72,11 @@ const BlockList = function BlockList(
     onIndexChange(e.eventObject.userData.index);
   }, [onIndexChange]);
 
+  const handleOver = useCallback((e: ThreeEvent<MouseEvent>) => {
+    e.stopPropagation();
+    setCursor('pointer');
+  }, []);
+
   // Materials
   const cubeMaterial = useMemo(() => (
     createCubeMaterial()
@@ -104,6 +109,7 @@ const BlockList = function BlockList(
             scale={SCALE_INSTANCES}
             key={"cubeInst" + index}
             onPointerDown={handlePointerDown}
+            onPointerOver={handleOver}
             onClick={handleClick}
             userData={{ index }}
           >

@@ -22,6 +22,10 @@ function getIndexFromPosition(
   );
 }
 
+function setCursor(c: string) {
+  document.body.style.cursor = c;
+}
+
 export default function useCubeDrag({
   count,
   offset,
@@ -34,7 +38,7 @@ export default function useCubeDrag({
     config: { mass: 2.0, tension: 100, friction: 40 }
   }), [currentIndex]);
 
-  const bind = useDrag(
+  const dragBind = useDrag(
     ({ active, movement: [mx], memo }) => {
       // init memo au début du drag
       if (!memo) memo = xGroup.get();
@@ -43,6 +47,7 @@ export default function useCubeDrag({
 
       if (active) {
         api.start({ xGroup: x, immediate: true });
+        setCursor("grabbing");
       } else {
         const index = getIndexFromPosition(
           xGroup.get(),
@@ -59,11 +64,19 @@ export default function useCubeDrag({
             friction: 5.0
           }
         });
+
+        setCursor("grab");
       }
 
       return memo;
     }
   );
+
+  const bind = {
+    ...dragBind(),
+    onPointerOver: () => setCursor('grab'),
+    onPointerOut: () => setCursor('default'),
+  }
 
   return { xGroup, bind };
 }

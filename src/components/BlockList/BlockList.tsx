@@ -71,15 +71,20 @@ const BlockList = function BlockList(
     e.stopPropagation();
     onIndexChange(e.eventObject.userData.index);
   }, [onIndexChange]);
-  
+
   // Materials
   const cubeMaterial = useMemo(() => (
     createCubeMaterial()
   ), []);
 
+
   return (<>
     {/* Drag panel */}
-    <mesh name="DragPanel" {...bind()} position={POSITION_PANEL}>
+    <mesh
+      {...bind}
+      name="DragPanel"
+      position={POSITION_PANEL}
+    >
       <planeGeometry args={POSITION_PANEL_GEOM} />
       <meshBasicMaterial transparent opacity={0} />
     </mesh>
